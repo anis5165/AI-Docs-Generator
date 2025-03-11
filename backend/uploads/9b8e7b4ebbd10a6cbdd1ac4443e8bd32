@@ -1,0 +1,23 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+int main(){
+    vector<int> v;
+    int n;
+    cout<<"Enter array size: ";
+    cin>>n;
+
+    cout<<"Enter Array Elements: ";
+    for(int i=0;i<n;i++){
+        int o;
+        cin>>o;
+        v.push_back(o);
+    }
+    vector<int> v2(n);
+    cout<<"Reverse order: ";
+    for(int i=0;i<n;i++){
+        v2[i] = v[n-1-i];
+        cout<<v2[i]<<" ";
+    }
+}
