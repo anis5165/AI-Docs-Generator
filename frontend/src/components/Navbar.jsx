@@ -11,8 +11,8 @@ const Navbar = () => {
                     <li><Link href="/about">About</Link></li>
                     <li><Link href="/contact">Contact</Link></li>
                     <li><Link href="/autodocs">Auto Docs</Link></li>
-                    <li className='bg-[#419EE3] px-4 py-2 rounded-lg '><Link href="/login">Login</Link></li>
-                    <li className='bg-[#419EE3] px-4 py-2 rounded-lg'><Link href="/register">Register</Link></li>
+                    <li className='bg-[#3f474e] px-4 py-2 rounded-lg '><Link href="/login">Login</Link></li>
+                    <li className='bg-[#3f474e] px-4 py-2 rounded-lg'><Link href="/register">Register</Link></li>
                 </ul>
             </nav>
         </div>
