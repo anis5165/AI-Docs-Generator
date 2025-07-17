@@ -14,7 +14,7 @@ const uploadFile = async (req, res) => {
     const fileContent = fs.readFileSync(req.file.path, "utf-8");
 
     // AI Model - Updated model name to the current version
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
     try {
       const prompt = `Generate comprehensive documentation for this code:
