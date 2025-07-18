@@ -1,6 +1,8 @@
 const express = require("express");
 const multer = require("multer");
 const { uploadFile, getAllDocs } = require("../controllers/docsController");
+const { Model } = require("mongoose");
+const model = require("../models/docsModel");
 
 const router = express.Router();
 const upload = multer({
@@ -29,5 +31,20 @@ const upload = multer({
 
 router.post("/upload", upload.single("file"), uploadFile);
 router.get("/docs", getAllDocs);
+
+
+router.delete("/delete/docs/:id", (req, res) => {
+  model.findByIdAndDelete(req.params.id)
+    .then((result) => {
+      if (!result) {
+        return res.status(404).json({ error: "Documentation not found" });
+      }
+      res.status(200).json({ message: "Documentation deleted successfully" });
+    })
+    .catch((err) => {
+      console.error("Delete error:", err);
+      res.status(500).json({ error: "Internal Server Error" });
+    });
+});
 
 module.exports = router;

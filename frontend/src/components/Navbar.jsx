@@ -11,7 +11,7 @@ const Navbar = () => {
     return (
         <div className='bg-[#010305] z-[100] fixed w-full top-0 text-white p-4 shadow-md'>
             <nav className='flex justify-between items-center max-w-7xl mx-auto'>
-                <h1 className='text-xl'>AI-Docs</h1>
+                <h1 className='text-xl'>CodocAI</h1>
                 <ul className='flex space-x-4 gap-3 items-center'>
                     <li><Link href="/">Home</Link></li>
                     <li><Link href="/about">About</Link></li>

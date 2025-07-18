@@ -5,12 +5,13 @@ import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 const CodeBlock = ({ language, code }) => {
   return (
     <div className="my-4 rounded-lg overflow-hidden">
-      <div className="bg-gray-800 text-gray-200 text-xs py-1 px-3 flex justify-between items-center">
+      <div className="bg-gray-800 text-white text-xs py-1 px-3 flex justify-between items-center">
         <span>{language}</span>
         <button 
           onClick={() => {
             navigator.clipboard.writeText(code);
             // Optional: Show a toast notification
+
           }}
           className="text-gray-400 hover:text-white"
         >

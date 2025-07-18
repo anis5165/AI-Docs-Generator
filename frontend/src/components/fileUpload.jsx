@@ -20,7 +20,6 @@ const FileUpload = ({ onUploadSuccess }) => {
           });
           
           if (response.data && response.data.data) {
-            // Success toast instead of alert
             onUploadSuccess();
             setFile(null);
           } else {
@@ -59,14 +58,14 @@ const FileUpload = ({ onUploadSuccess }) => {
     const acceptedExtensions = ['.js', '.jsx', '.ts', '.tsx', '.py', '.java', '.html', '.css'];
 
     return (
-        <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">Generate Documentation</h2>
+        <div className="bg-[#16181a] rounded-2xl shadow-lg p-8 border border-[#3f474e]">
+            <h2 className="text-2xl font-bold text-white mb-4">Generate Documentation</h2>
             
             <div 
-                className={`border-2 border-dashed rounded-lg p-8 text-center ${
+                className={`border-2 border-dashed rounded-xl p-8 text-center ${
                     dragActive 
-                        ? "border-indigo-500 bg-indigo-50" 
-                        : "border-gray-300 hover:border-indigo-400"
+                        ? "border-indigo-500 bg-[#23272b]" 
+                        : "border-[#3f474e] hover:border-indigo-400 bg-[#16181a]"
                 } transition-all duration-200 ease-in-out`}
                 onDragEnter={handleDrag}
                 onDragLeave={handleDrag}
@@ -80,16 +79,16 @@ const FileUpload = ({ onUploadSuccess }) => {
                         </svg>
                     </div>
                     
-                    <div className="text-gray-500">
+                    <div className="text-slate-200">
                         {file ? (
                             <div className="flex items-center justify-center space-x-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                 </svg>
-                                <span className="font-medium">{file.name}</span>
+                                <span className="font-medium text-slate-100">{file.name}</span>
                                 <button 
                                     onClick={() => setFile(null)}
-                                    className="text-red-500 hover:text-red-700"
+                                    className="text-red-400 hover:text-red-600"
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -98,10 +97,9 @@ const FileUpload = ({ onUploadSuccess }) => {
                             </div>
                         ) : (
                             <>
-                                <p className="mb-2">Drag and drop a code file, or click to select</p>
-                                <p className="text-sm">
-                                    Supported formats: 
-                                    {acceptedExtensions.join(', ')}
+                                <p className="mb-2 text-indigo-300">Drag and drop a code file, or click to select</p>
+                                <p className="text-sm text-indigo-400">
+                                    Supported formats: {acceptedExtensions.join(', ')}
                                 </p>
                             </>
                         )}
@@ -117,7 +115,7 @@ const FileUpload = ({ onUploadSuccess }) => {
                         />
                         <label 
                             htmlFor="fileInput"
-                            className="cursor-pointer inline-flex items-center justify-center px-4 py-2 bg-indigo-100 text-indigo-700 hover:bg-indigo-200 rounded-md font-medium transition-colors"
+                            className="cursor-pointer inline-flex items-center justify-center px-4 py-2 bg-[#3f474e] text-white hover:bg-indigo-700 rounded-md font-medium transition-colors"
                         >
                             {file ? "Choose Another File" : "Select File"}
                         </label>
@@ -129,9 +127,9 @@ const FileUpload = ({ onUploadSuccess }) => {
                 <button
                     onClick={handleUpload}
                     disabled={!file || loading}
-                    className={`flex items-center justify-center px-5 py-2 rounded-md text-white font-medium transition-all ${
+                    className={`flex items-center justify-center px-6 py-2 rounded-lg text-white font-semibold transition-all ${
                         !file || loading 
-                            ? "bg-gray-400 cursor-not-allowed" 
+                            ? "bg-[#3f474e] opacity-60 cursor-not-allowed" 
                             : "bg-indigo-600 hover:bg-indigo-700"
                     }`}
                 >

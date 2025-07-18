@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recording Controls</title>
+    <style>
+        body {
+            width: 300px;
+            padding: 16px;
+            font-family: Arial, sans-serif;
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+        .primary-button {
+            background: #007bff;
+            color: white;
+        }
+        .primary-button:hover {
+            background: #0056b3;
+        }
+        .secondary-button {
+            background: #6c757d;
+            color: white;
+        }
+        .secondary-button:hover {
+            background: #5a6268;
+        }
+        .auth-container {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        .title {
+            text-align: center;
+            margin-bottom: 16px;
+            color: #333;
+            font-size: 18px;
+        }
+        .recording-container {
+            display: none;
+            margin-top: 16px;
+        }
+        .screenshots-container {
+            margin-top: 16px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .auth-status {
+            text-align: center;
+            margin: 10px 0;
+            font-size: 14px;
+            color: #666;
+        }
+        button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+        .screenshot-container {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">SOPify Extension</h1>
+    
+    <div id="authStatus" class="auth-status"></div>
+
+    <div id="authContainer" class="auth-container button-container">
+        <button id="loginBtn" class="primary-button">Login</button>
+        <button id="signupBtn" class="secondary-button">Sign Up</button>
+    </div>
+
+    <div id="recordingContainer" class="recording-container">
+        <div class="button-container">
+            <button id="startBtn" class="primary-button">Start Capturing</button>
+            <button id="stopBtn" class="secondary-button" disabled>Stop Capturing</button>
+            <button id="clearBtn" class="secondary-button">Clear Screenshots</button>
+            <button id="manageSopBtn" class="primary-button" style="background: linear-gradient(to right, #4f46e5, #7e22ce); margin-top: 12px;">
+                Manage SOPs
+            </button>
+        </div>
+        <div id="screenshots" class="screenshots-container"></div>
+    </div>
+
+    <div id="modal" class="modal" style="display: none;">
+        <span class="modal-close">&times;</span>
+        <img id="modalImg" src="" alt="Screenshot Preview">
+    </div>
+
+    <script src="sidepanel.js"></script>
+</body>
+</html>
