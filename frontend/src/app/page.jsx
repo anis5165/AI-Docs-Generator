@@ -17,7 +17,7 @@ const Home = () => {
       </section>
 
       {/* Features section */}
-      <section className='py-20 bg-[#010305] my-5 text-white'>
+      <section className='py-20 my-5 text-white'>
         <div className='max-w-6xl mx-auto '>
           <h1 className='text-4xl text-center font-semibold'>Powerful Features</h1>
           <p className='text-xl text-center py-3'>AutoDocs combines AI technology with modern web development to streamline <br /> your documentation process.</p>
@@ -59,7 +59,7 @@ const Home = () => {
 
 
       {/* How it works */}
-      <section className='py-20 bg-[#010305] my-5 text-white'>
+      <section className='py-20 my-5 text-white'>
         <div className='max-w-6xl mx-auto '>
           <h1 className='text-4xl text-center font-semibold'>How It Works</h1>
           <p className='text-xl text-center py-3'>Creating professional documentation has never been easier. AutoDocs streamlines the entire process.</p>
@@ -91,7 +91,7 @@ const Home = () => {
 
 
       {/* why choose */}
-      <section className='py-20 bg-[#010305] my-5 text-white'> 
+      <section className='py-20 my-5 text-white'> 
         <div className='max-w-6xl mx-auto'>
             <h1 className='text-4xl text-center font-semibold'>Why Choose AutoDocs?</h1>
             <p className='text-xl text-center py-3'>AutoDocs offers significant advantages over traditional documentation methods.</p>
