@@ -4,6 +4,7 @@ import axios from "axios";
 import FileUpload from "@/components/fileUpload";
 import CodeBlock from "@/components/syntaxHilighter";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [docs, setDocs] = useState([]);
@@ -24,6 +25,10 @@ export default function Home() {
       setLoading(false);
     }
   };
+
+
+  const router = useRouter();
+  
   
 
   const handleDeleteDocs = async (id) => {
@@ -41,6 +46,14 @@ export default function Home() {
   };
 
   useEffect(() => {
+    if(!localStorage.getItem('token')) {
+      toast.error("Please login to continue", {
+        icon: '🚫',
+      });
+      router.push('/login');
+      return; 
+    }
+
     fetchDocs();
     // eslint-disable-next-line
   }, []);

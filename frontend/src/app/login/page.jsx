@@ -25,6 +25,7 @@ const Login = () => {
                     console.log(result);
                     toast.success('Login successful');
                     login(result.data.user);
+                    // console.log(result.data.user);
                     localStorage.setItem('token', result.data.token);
                     router.push('/');
                 }).catch((err) => {

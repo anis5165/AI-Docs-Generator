@@ -1,4 +1,7 @@
+'use client';
+import { useRouter } from 'next/navigation';
 import React from 'react';
+import toast from 'react-hot-toast';
 
 const features = [
   "Quickly generate professional-quality documentation",
@@ -8,6 +11,22 @@ const features = [
 ];
 
 const About = () => {
+
+  const router = useRouter();
+  const handleRoute = () => {
+    if (!localStorage.getItem('token')) {
+      toast("Please login to continue", {
+        icon: '🚫',
+      });
+      router.push('/login');
+    }
+    else {
+      router.push('/autodocs');
+    }
+  }
+  
+
+
   return (
     <div className="flex items-center justify-center min-h-screen px-4">
       <div className="mt-12 rounded-2xl shadow-2xl p-10 max-w-5xl w-full text-white">
@@ -35,7 +54,7 @@ const About = () => {
           </ul>
         </div>
         <div className="text-center mt-6">
-          <span className="inline-block bg-[#3f474e] text-white px-6 py-3 rounded-lg font-semibold shadow-lg">
+          <span onClick={handleRoute} className="inline-block bg-[#3f474e] text-white px-6 py-3 rounded-lg font-semibold shadow-lg">
             Start uploading. Start understanding.
           </span>
         </div>

@@ -25,9 +25,9 @@ const Navbar = () => {
                     <li><Link href="/">Home</Link></li>
                     <li><Link href="/about">About</Link></li>
                     <li><Link href="/contact">Contact</Link></li>
-                    <li><Link href="/autodocs">Auto Docs</Link></li>
                     {user ? (
                         <>
+                            <li><Link href="/autodocs">Auto Docs</Link></li>
                             <li className='text-sm'>Welcome, {user.name}</li>
                             <li onClick={logout} className='cursor-pointer bg-[#3f474e] px-4 py-2 rounded-lg'>Logout</li>
                         </>
@@ -46,9 +46,9 @@ const Navbar = () => {
                         <li><Link href="/" onClick={() => setMenuOpen(false)}>Home</Link></li>
                         <li><Link href="/about" onClick={() => setMenuOpen(false)}>About</Link></li>
                         <li><Link href="/contact" onClick={() => setMenuOpen(false)}>Contact</Link></li>
-                        <li><Link href="/autodocs" onClick={() => setMenuOpen(false)}>Auto Docs</Link></li>
                         {user ? (
                             <>
+                                <li><Link href="/autodocs" onClick={() => setMenuOpen(false)}>Auto Docs</Link></li>
                                 <li className='text-sm'>Welcome, {user.name}</li>
                                 <li onClick={() => { logout(); setMenuOpen(false); }} className='cursor-pointer bg-[#3f474e] px-4 py-2 rounded-lg'>Logout</li>
                             </>
