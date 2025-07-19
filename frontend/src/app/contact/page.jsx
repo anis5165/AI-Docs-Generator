@@ -32,7 +32,7 @@ const Contact = () => {
   return (
     <div className='text-white mt-14 pt-16 p-4'>
         <div>
-            <h1 className='text-4xl font-semibold text-center'>Contact - CodocAI</h1>
+            <h1 className='text-5xl font-extrabold text-center'>Contact <span className='text-[#3f474e]'>CodocAI</span></h1>
             <p className='mt-4 text-[#3f474e] text-center'>We would love to hear from you! Please fill out the form below to get in touch with us.</p>
         </div>
         <div className='max-w-md mx-auto mt-6'>

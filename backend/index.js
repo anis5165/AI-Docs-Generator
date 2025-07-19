@@ -6,7 +6,7 @@ const documentationRoutes = require("./routers/docsRouter");
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(cors({ origin: 'http://localhost:3001' }));
+app.use(cors({ origin: 'http://localhost:3000' }));
 
 // API Routes
 app.use("/api", documentationRoutes);

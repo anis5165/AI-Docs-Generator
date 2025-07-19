@@ -4,25 +4,30 @@ const Home = () => {
   return (
     <>
       {/* Hero section */}
-      <section className='min-h-screen'>
+      <section className='min-h-screen px-3'>
         <div className='text-center space-y-5 pt-28'>
-          <h1 className=' text-6xl text-white text-center font-semibold'>AI-Powered Documentation Generator</h1>
-          <p className='text-gray-100 text-center font-semibold text-xl'>Automatically create, structure, and maintain well-organized documentation for your <br /> software projects. Save time and improve consistency with AI assistance.</p>
+          <h1 className='text-5xl font-extrabold md:text-6xl text-white text-center'>AI-Powered Documentation Generator <span className='text-[#3f474e]'>CodocAI</span> </h1>
+          <p className='text-[#3f474e] text-center font-semibold md:text-xl'>Automatically create, structure, and maintain well-organized documentation for your <br /> software projects. Save time and improve consistency with AI assistance.</p>
           <button className='bg-[#3f474e] text-white text-center text-xl px-4 py-2 rounded-2xl'>Get Started</button>
-          <div className='mx-auto z-[-10] mt-16 rounded-lg shadow-2xl border border-gray-700 bg-[#112240] p-4 max-w-4xl hover:shadow-blue-500/20 duration-300transform hover:scale-105 transition duration-300 cyber-border scanner flex flex-col md:flex-row justify-between items-start md:items-center relative overflow-hidden'>
+          <div className='mx-auto z-[-10] mt-10 md:mt-16 rounded-lg shadow-2xl border border-gray-700 bg-[#112240] p-4 max-w-4xl hover:shadow-blue-500/20 duration-300transform hover:scale-105 transition duration-300 cyber-border scanner flex flex-col md:flex-row justify-between items-start md:items-center relative overflow-hidden'>
 
-            <img src="/image.png" className='' alt="" />
+            <img src="/image.jpg" className='' alt="" />
           </div>
         </div>
       </section>
 
-      {/* Features section */}
-      <section className='py-20 my-5 text-white'>
-        <div className='max-w-6xl mx-auto '>
-          <h1 className='text-4xl text-center font-semibold'>Powerful Features</h1>
-          <p className='text-xl text-center py-3'>AutoDocs combines AI technology with modern web development to streamline <br /> your documentation process.</p>
 
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-8 mt-10'>
+      <div className='text-[#60656d] text-center px-3 mx-auto'>
+        <hr />
+      </div>
+
+      {/* Features section */}
+      <section className=' py-10 md:py-20 my-5 px-3 text-white'>
+        <div className='max-w-6xl mx-auto '>
+          <h1 className='text-2xl md:text-4xl text-center font-semibold'>Powerful Features</h1>
+          <p className='md:text-xl text-center py-3'>AutoDocs combines AI technology with modern web development to streamline <br /> your documentation process.</p>
+
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-8 mt-6 md:mt-10'>
             <div className='border border-[#3f474e] hover:shadow-2xl hover:shadow-[#3f474e] p-6 space-y-2 rounded-lg hover:scale-95 transition-scale duration-300'>
               <p className='text-left text-4xl'>🤖</p>
               <h1 className='text-left text-xl'>AI-Powered Generation</h1>
@@ -57,31 +62,35 @@ const Home = () => {
         </div>
       </section>
 
+      <div className='text-[#60656d] text-center px-3 mx-auto'>
+        <hr />
+      </div>
+
 
       {/* How it works */}
-      <section className='py-20 my-5 text-white'>
+      <section className='py-10 md:py-20 my-5 px-3 text-white'>
         <div className='max-w-6xl mx-auto '>
-          <h1 className='text-4xl text-center font-semibold'>How It Works</h1>
-          <p className='text-xl text-center py-3'>Creating professional documentation has never been easier. AutoDocs streamlines the entire process.</p>
+          <h1 className='text-2xl md:text-4xl text-center font-semibold'>How It Works</h1>
+          <p className='md:text-xl text-center py-3'>Creating professional documentation has never been easier. AutoDocs streamlines the entire process.</p>
 
-          <div className='grid grid-cols-1 md:grid-cols-4 gap-8 mt-16'>
+          <div className='grid grid-cols-1 md:grid-cols-4 gap-8 mt-10 md:mt-16'>
             <div className='space-y-2  text-center'>
-              <h1 className='border rounded-full w-12 ml-28 px-5 py-3 bg-[#3f474e]'>1</h1>
+              <h1 className='border rounded-full w-12 ml-44 md:ml-28 px-5 py-3 bg-[#3f474e]'>1</h1>
               <h1 className='text-xl'>Upload Source Code</h1>
               <p>Upload or paste your source code through our user-friendly interface.</p>
             </div>
             <div className='space-y-2  text-center'>
-              <h1 className='border rounded-full w-12 ml-28 px-5 py-3 bg-[#3f474e]'>2</h1>
+              <h1 className='border rounded-full w-12 ml-44 md:ml-28 px-5 py-3 bg-[#3f474e]'>2</h1>
               <h1 className='text-xl'>AI Analysis</h1>
               <p>Our AI analyzes your code and generates structured documentation automatically.</p>
             </div>
             <div className='space-y-2  text-center'>
-              <h1 className='border rounded-full w-12 ml-28 px-5 py-3 bg-[#3f474e]'>3</h1>
+              <h1 className='border rounded-full w-12 ml-44 md:ml-28 px-5 py-3 bg-[#3f474e]'>3</h1>
               <h1 className='text-xl'>Edit & Customize</h1>
               <p>Refine the generated documentation using our live markdown editor and theme customizer.</p>
             </div>
             <div className='space-y-2  text-center'>
-              <h1 className='border rounded-full w-12 ml-28 px-5 py-3 bg-[#3f474e]'>4</h1>
+              <h1 className='border rounded-full w-12 ml-44 md:ml-28 px-5 py-3 bg-[#3f474e]'>4</h1>
               <h1 className='text-xl'>Export & Share</h1>
               <p>Export your documentation in various formats and share with your team or clients.</p>
             </div>
@@ -89,15 +98,18 @@ const Home = () => {
         </div>
       </section>
 
+      <div className='text-[#60656d] text-center px-3 mx-auto'>
+        <hr />
+      </div>
 
       {/* why choose */}
-      <section className='py-20 my-5 text-white'> 
+      <section className='py-10 md:py-20 my-5 px-3 text-white'> 
         <div className='max-w-6xl mx-auto'>
-            <h1 className='text-4xl text-center font-semibold'>Why Choose AutoDocs?</h1>
-            <p className='text-xl text-center py-3'>AutoDocs offers significant advantages over traditional documentation methods.</p>
+            <h1 className='text-2xl md:text-4xl text-center font-semibold'>Why Choose AutoDocs?</h1>
+            <p className='md:text-xl text-center py-3'>AutoDocs offers significant advantages over traditional documentation methods.</p>
 
-            <div className='flex justify-center items-center gap-36 mt-10'>
-              <img className='w-96 scale-125 mt-5' src="/autodocs2.png" alt="" />
+            <div className='md:flex justify-center items-center gap-36 mt-10'>
+              <img className='w-96 md:scale-125 mt-5' src="/autodocs2.png" alt="" />
               <div className='space-y-4'>
                 <div className=''>
                   <h1 className='text-xl'><span className='text-[#3f474e]'>✓</span> Time Efficiency</h1>

@@ -116,7 +116,7 @@ export default function Home() {
     <div className="min-h-screen pt-20 pb-10">
       <div className="py-8 mx-auto max-w-5xl mb-10">
         <div className="px-8 text-center">
-          <h1 className="text-4xl font-extrabold text-white mb-2 tracking-tight">
+          <h1 className="text-5xl font-extrabold text-white mb-2 tracking-tight">
             CodocAI
           </h1>
           <p className="text-[#3F474E] text-lg mb-2">

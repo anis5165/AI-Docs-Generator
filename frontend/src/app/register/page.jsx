@@ -43,7 +43,7 @@ const Signup = () => {
 
     <div className='max-w-md mx-auto pt-20'>
       <div className='text-white p-6  rounded-lg shadow-lg'>
-        <h1 className='text-4xl font-bold text-center'>Register Here</h1>
+        <h1 className='text-5xl font-extrabold text-center'>Register <span className='text-[#3f474e]'>CodocAI</span></h1>
         <p className='mt-4 text-[#3f474e] text-center'>Please fill in the form below to create an account.</p>
 
 
