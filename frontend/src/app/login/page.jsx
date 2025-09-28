@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import * as Yup from 'yup';
 import Link from 'next/link';
 import { useAppContext } from '@/context/appcontext';
+import { signIn, useSession } from "next-auth/react";
 
 const loginSchemaValidation = Yup.object().shape({
   email: Yup.string().email('Invalid email format').required('Email is required'),
@@ -16,6 +17,12 @@ const loginSchemaValidation = Yup.object().shape({
 const Login = () => {
     const {login} = useAppContext();
     const router = useRouter();
+
+    const {data : Session} = useSession();
+    if (Session)  {
+        console.log(Session);
+        router.push("/");
+    }
 
     const loginForm = useFormik({
         initialValues: { 'email': '', 'password': '' }, 
@@ -95,9 +102,24 @@ const Login = () => {
         <div>
           <p className='text-center text-sm text-[#3f474e]'>Or login with</p>
           <div className='flex justify-center items-center gap-4 mt-2'>
-            <button className='bg-[#3f474e] text-white p-2 rounded hover:bg-[#515c65] transition duration-200'>Google</button>
-            <button className='bg-[#3f474e] text-white p-2 rounded hover:bg-[#515c65] transition duration-200'>GitHub</button>
-            <button className='bg-[#3f474e] text-white p-2 rounded hover:bg-[#515c65] transition duration-200'>Twitter</button>
+            <button
+              className='bg-[#3f474e] text-white p-2 rounded hover:bg-[#515c65] transition duration-200'
+              onClick={() => signIn('google')}
+            >
+                Google
+            </button> 
+            <button
+              className='bg-[#3f474e] text-white p-2 rounded hover:bg-[#515c65] transition duration-200'
+              onClick={() => signIn('github')}
+            >
+              GitHub
+            </button>
+            <button
+               className='bg-[#3f474e] text-white p-2 rounded hover:bg-[#515c65] transition duration-200'
+               onClick={() => signIn('twitter')}
+            >
+                Twitter
+            </button>
           </div>
         </div>
         <div className='mt-2'>

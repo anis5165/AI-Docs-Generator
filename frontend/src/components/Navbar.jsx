@@ -1,14 +1,30 @@
 'use client';
 import { useAppContext } from '@/context/appcontext';
-import Link from 'next/link'
-import React, { useState } from 'react'
+import Link from 'next/link';
+import React, { useState } from 'react';
+import { useSession, signOut } from "next-auth/react";
 
 const Navbar = () => {
     const { user, logout } = useAppContext();
+    const { data: session } = useSession();
     const [menuOpen, setMenuOpen] = useState(false);
+    // console.log("Session data:", session);
+
+    // Determine if user is logged in via JWT or NextAuth
+    const isLoggedIn = !!user || !!session;
+// 
+    // Get display name
+    const displayName = user?.name || session?.user?.name;
+
+    // Logout handler for both
+    const handleLogout = () => {
+        if (user) logout();
+        if (session) signOut();
+        setMenuOpen(false);
+    };
 
     return (
-        <div className='bg-[#010305] z-[100] fixed top-0 w-full  text-white p-4 shadow-md'>
+        <div className='bg-[#010305] z-[100] fixed top-0 w-full text-white p-4 shadow-md'>
             <nav className='flex justify-between items-center max-w-7xl mx-auto'>
                 <h1 className='text-xl font-bold'>CodocAI</h1>
                 <button
@@ -25,11 +41,11 @@ const Navbar = () => {
                     <li><Link href="/">Home</Link></li>
                     <li><Link href="/about">About</Link></li>
                     <li><Link href="/contact">Contact</Link></li>
-                    {user ? (
+                    <li><Link href="/autodocs">Auto Docs</Link></li>
+                    {isLoggedIn ? (
                         <>
-                            <li><Link href="/autodocs">Auto Docs</Link></li>
-                            <li className='text-sm'>Welcome, {user.name}</li>
-                            <li onClick={logout} className='cursor-pointer bg-[#3f474e] px-4 py-2 rounded-lg'>Logout</li>
+                            <li className='text-sm'>Welcome, {displayName}</li>
+                            <li onClick={handleLogout} className='cursor-pointer bg-[#3f474e] px-4 py-2 rounded-lg'>Logout</li>
                         </>
                     ) : (
                         <>
@@ -46,23 +62,23 @@ const Navbar = () => {
                         <li><Link href="/" onClick={() => setMenuOpen(false)}>Home</Link></li>
                         <li><Link href="/about" onClick={() => setMenuOpen(false)}>About</Link></li>
                         <li><Link href="/contact" onClick={() => setMenuOpen(false)}>Contact</Link></li>
-                        {user ? (
+                        <li><Link href="/autodocs" onClick={() => setMenuOpen(false)}>Auto Docs</Link></li>
+                        {isLoggedIn ? (
                             <>
-                                <li><Link href="/autodocs" onClick={() => setMenuOpen(false)}>Auto Docs</Link></li>
-                                <li className='text-sm'>Welcome, {user.name}</li>
-                                <li onClick={() => { logout(); setMenuOpen(false); }} className='cursor-pointer bg-[#3f474e] px-4 py-2 rounded-lg'>Logout</li>
+                                <li className='text-sm'>Welcome, {displayName}</li>
+                                <li onClick={handleLogout} className='cursor-pointer bg-[#3f474e] px-4 py-2 rounded-lg'>Logout</li>
                             </>
                         ) : (
                             <>
-                                <li className='mt-2 mb-6'><Link className='bg-[#3f474e] px-4  py-2 rounded-lg' href="/login" onClick={() => setMenuOpen(false)}>Login</Link></li>
-                                <li className='mb-2'><Link className='bg-[#3f474e] px-4 py-2 rounded-lg' href="/register" onClick={() => setMenuOpen(false)}>Register</Link></li>
+                                <li><Link className='bg-[#3f474e] px-4 py-2 rounded-lg' href="/login" onClick={() => setMenuOpen(false)}>Login</Link></li>
+                                <li><Link className='bg-[#3f474e] px-4 py-2 rounded-lg' href="/register" onClick={() => setMenuOpen(false)}>Register</Link></li>
                             </>
                         )}
                     </ul>
                 </div>
             )}
         </div>
-    )
-}
+    );
+};
 
-export default Navbar
+export default Navbar;

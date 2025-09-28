@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import React from 'react'
 import toast from 'react-hot-toast';
 import * as Yup from 'yup';
-
+import { signIn, useSession } from "next-auth/react";
 
 const signupSchemaValidation = Yup.object().shape({
   name: Yup.string().required('Name is required'),
@@ -16,9 +16,14 @@ const signupSchemaValidation = Yup.object().shape({
 })
 
 const Signup = () => {
-
-
   const router = useRouter();
+
+  const { data: session } = useSession();
+  if (session) {
+    // console.log(session);
+    router.push("/");
+  }
+
   const signupForm = useFormik({
     initialValues: { 'name': '', 'email': '', 'password': '', 'confirmPassword': '' },
     onSubmit: (values) => {
@@ -123,9 +128,24 @@ const Signup = () => {
         <div>
           <p className='text-center text-sm text-[#3f474e]'>Or register with</p>
           <div className='flex justify-center items-center gap-4 mt-2'>
-            <button className='bg-[#3f474e] text-white p-2 rounded hover:bg-[#515c65] transition duration-200'>Google</button>
-            <button className='bg-[#3f474e] text-white p-2 rounded hover:bg-[#515c65] transition duration-200'>GitHub</button>
-            <button className='bg-[#3f474e] text-white p-2 rounded hover:bg-[#515c65] transition duration-200'>Twitter</button>
+            <button
+              className='bg-[#3f474e] text-white p-2 rounded hover:bg-[#515c65] transition duration-200'
+              onClick={() => signIn('google')}
+            >
+              Google
+            </button>
+            <button
+              className='bg-[#3f474e] text-white p-2 rounded hover:bg-[#515c65] transition duration-200'
+              onClick={() => signIn('github')}
+            >
+              GitHub
+            </button>
+            <button
+              className='bg-[#3f474e] text-white p-2 rounded hover:bg-[#515c65] transition duration-200'
+              onClick={() => signIn('twitter')}
+            >
+              Twitter
+            </button>
           </div>
         </div>
         <div className='mt-2'>
