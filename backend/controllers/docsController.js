@@ -14,7 +14,7 @@ const uploadFile = async (req, res) => {
     const fileContent = fs.readFileSync(req.file.path, "utf-8");
 
     // AI Model - Updated model name to the current version
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
 
     try {
       const prompt = `Generate comprehensive documentation for this code:
@@ -87,9 +87,11 @@ const uploadFile = async (req, res) => {
       const aiGeneratedDoc = result.response.text();
 
       // Save to MongoDB
+      const userId = req.body.userId; // For JWT, send userId in body; for NextAuth, send session user id
       const doc = new Documentation({
         filename: req.file.originalname,
         content: aiGeneratedDoc,
+        userId: userId, // <-- Save userId
       });
       await doc.save();
 

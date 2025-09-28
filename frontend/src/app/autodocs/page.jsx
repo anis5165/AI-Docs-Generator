@@ -5,16 +5,25 @@ import FileUpload from "@/components/fileUpload";
 import CodeBlock from "@/components/syntaxHilighter";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { signIn, useSession } from "next-auth/react";
+import { useAppContext } from "@/context/appcontext";
 
 export default function Home() {
   const [docs, setDocs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeDoc, setActiveDoc] = useState(null);
+  const router = useRouter();
+
+  const { user } = useAppContext(); // JWT user
+  const { data: session } = useSession(); // NextAuth user
+
+  // Get userId from JWT or NextAuth
+  const userId = user?.id || session?.user?.email;
 
   const fetchDocs = async () => {
     setLoading(true);
     try {
-      const { data } = await axios.get("http://localhost:5000/api/docs");
+      const { data } = await axios.get(`${NEXT_PUBLIC_API_URL}/api/docs/user/${userId}`);
       setDocs(data);
       if (data.length > 0 && !activeDoc) {
         setActiveDoc(data[0]._id);
@@ -26,14 +35,24 @@ export default function Home() {
     }
   };
 
-
-  const router = useRouter();
+  const fetchDocById = async (id) => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get(`${NEXT_PUBLIC_API_URL}/api/docs/${id}`);
+      setActiveDoc(id);
+      // Optionally, update docs state if you want to show only the selected doc
+      // setDocs([data]);
+      // Or just store the fetched doc in a separate state if needed
+    } catch (error) {
+      toast.error("Failed to fetch document");
+    } finally {
+      setLoading(false);
+    }
+  };
   
-  
-
   const handleDeleteDocs = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/delete/docs/${id}`);
+      await axios.delete(`${NEXT_PUBLIC_API_URL}/api/delete/docs/${id}`);
       setDocs(docs.filter(doc => doc._id !== id));
       fetchDocs(); // Refresh the list after deletion
       // setActiveDoc(null); // Reset active doc if it was deleted
@@ -46,7 +65,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if(!localStorage.getItem('token')) {
+    if(!session && !localStorage.getItem('token')) {
       toast.error("Please login to continue", {
         icon: '🚫',
       });
@@ -56,7 +75,7 @@ export default function Home() {
 
     fetchDocs();
     // eslint-disable-next-line
-  }, []);
+  }, [session]);
 
   // Function to render documentation content with proper code highlighting
   const renderDocContent = (content) => {
@@ -161,29 +180,36 @@ export default function Home() {
               <h2 className="font-bold text-xl mb-4 text-indigo-200 border-b border-indigo-700 pb-2">Documents</h2>
               <ul className="space-y-3">
                 {docs.map((doc) => (
-                  <li key={doc._id}>
-                    <button
-                      onClick={() => setActiveDoc(doc._id)}
-                      className={`w-full text-left px-3 py-2 rounded-md transition-colors hover:bg-[#23272b] ${
+                  <li key={doc._id} className="relative">
+                    <div
+                      onClick={() => fetchDocById(doc._id)}
+                      className={`w-full text-left px-3 py-2 rounded-md transition-colors hover:bg-[#23272b] cursor-pointer ${
                         activeDoc === doc._id
                           ? "bg-[#3f474e] border-l-4 border-indigo-500 font-semibold text-indigo-100"
                           : "text-indigo-200"
                       }`}
                     >
-                      <div className="flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
-                        {doc.filename}
-                      </div>
-                      <div>
-                        
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                          </svg>
+                          {doc.filename}
+                        </div>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDeleteDocs(doc._id);
+                          }}
+                          className="ml-4 text-xs text-red-400 hover:text-red-900 px-2 py-1 rounded"
+                        >
+                          Delete
+                        </button>
                       </div>
                       <div className="text-xs text-indigo-400 mt-1">
-                        <button onClick={() => handleDeleteDocs(doc._id)} className="mr-5 hover:text-red-900">Delete</button>
                         {new Date(doc.createdAt).toLocaleDateString()}
                       </div>
-                    </button>
+                    </div>
                   </li>
                 ))}
               </ul>

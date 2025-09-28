@@ -32,6 +32,17 @@ const upload = multer({
 router.post("/upload", upload.single("file"), uploadFile);
 router.get("/docs", getAllDocs);
 
+router.get("/docs/:id", (req, res) => {
+  model
+    .findById(req.params.id)
+    .then((doc) => {
+      if (!doc) return res.status(404).json({ error: "Not found" });
+      res.json(doc);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: "Internal Server Error" });
+    });
+});
 
 router.delete("/delete/docs/:id", (req, res) => {
   model.findByIdAndDelete(req.params.id)
@@ -45,6 +56,12 @@ router.delete("/delete/docs/:id", (req, res) => {
       console.error("Delete error:", err);
       res.status(500).json({ error: "Internal Server Error" });
     });
+});
+
+router.get("/docs/user/:userId", (req, res) => {
+  model.find({ userId: req.params.userId })
+    .then((docs) => res.json(docs))
+    .catch((err) => res.status(500).json({ error: "Internal Server Error" }));
 });
 
 module.exports = router;

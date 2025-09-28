@@ -1,21 +1,31 @@
 'use client';
 import { useState } from "react";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 
-const FileUpload = ({ onUploadSuccess }) => {
+const FileUpload = ({ onUploadSuccess, userId }) => {
     const [file, setFile] = useState(null);
     const [loading, setLoading] = useState(false);
     const [dragActive, setDragActive] = useState(false);
+    const { data: session } = useSession();
+    if (session) {
+        var useremail = session.user?.email
+    }
 
     const handleUpload = async () => {
         if (!file) return alert("Please select a file!");
-      
         setLoading(true);
         const formData = new FormData();
         formData.append("file", file);
-      
+        if (useremail == null){
+            formData.append("userId", userId); // <-- Add userId here
+        }
+        else{
+            formData.append("userId", useremail); // <-- Add userId here
+        }
+
         try {
-          const response = await axios.post("http://localhost:5000/api/upload", formData, {
+          const response = await axios.post(`${NEXT_PUBLIC_API_URL}/api/upload`, formData, {
             headers: { "Content-Type": "multipart/form-data" },
           });
           

@@ -27,7 +27,7 @@ const Signup = () => {
   const signupForm = useFormik({
     initialValues: { 'name': '', 'email': '', 'password': '', 'confirmPassword': '' },
     onSubmit: (values) => {
-      axios.post('http://localhost:5000/user/register', values)
+      axios.post(`${NEXT_PUBLIC_API_URL}/user/register`, values)
         .then((result) => {
           console.log(result);
           toast.success('User registered successfully');
@@ -139,12 +139,6 @@ const Signup = () => {
               onClick={() => signIn('github')}
             >
               GitHub
-            </button>
-            <button
-              className='bg-[#3f474e] text-white p-2 rounded hover:bg-[#515c65] transition duration-200'
-              onClick={() => signIn('twitter')}
-            >
-              Twitter
             </button>
           </div>
         </div>

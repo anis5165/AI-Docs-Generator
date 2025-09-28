@@ -12,7 +12,7 @@ const Contact = () => {
     const contactForm = useFormik({
         initialValues: { 'name': '', 'email': '', 'message': '' },
         onSubmit: (values) => {
-            axios.post('http://localhost:5000/contact/add', values)
+            axios.post(`${NEXT_PUBLIC_API_URL}/contact/add`, values)
                 .then((result) => {
                     console.log(result);
                     toast.success('Message sent successfully');
