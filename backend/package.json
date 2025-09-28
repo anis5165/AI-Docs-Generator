@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "vite build",
     "dev": "nodemon index.js",
     "start": "node index.js"
   },
