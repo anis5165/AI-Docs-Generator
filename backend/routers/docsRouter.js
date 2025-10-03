@@ -44,6 +44,32 @@ router.get("/docs/:id", (req, res) => {
     });
 });
 
+// Update documentation content
+router.put("/docs/:id", (req, res) => {
+  const { content } = req.body;
+  
+  if (!content) {
+    return res.status(400).json({ error: "Content is required" });
+  }
+
+  model
+    .findByIdAndUpdate(
+      req.params.id,
+      { content: content, updatedAt: new Date() },
+      { new: true }
+    )
+    .then((doc) => {
+      if (!doc) {
+        return res.status(404).json({ error: "Documentation not found" });
+      }
+      res.json({ message: "Documentation updated successfully", data: doc });
+    })
+    .catch((err) => {
+      console.error("Update error:", err);
+      res.status(500).json({ error: "Internal Server Error" });
+    });
+});
+
 router.delete("/delete/docs/:id", (req, res) => {
   model.findByIdAndDelete(req.params.id)
     .then((result) => {

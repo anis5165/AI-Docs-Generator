@@ -27,7 +27,7 @@ const Login = () => {
     const loginForm = useFormik({
         initialValues: { 'email': '', 'password': '' }, 
         onSubmit: (values) => {
-            axios.post(`${NEXT_PUBLIC_API_URL}/user/login`, values)
+            axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user/login`, values)
                 .then((result) => {
                     console.log(result);
                     toast.success('Login successful');

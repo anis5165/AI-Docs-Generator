@@ -25,7 +25,7 @@ const FileUpload = ({ onUploadSuccess, userId }) => {
         }
 
         try {
-          const response = await axios.post(`${NEXT_PUBLIC_API_URL}/api/upload`, formData, {
+          const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/upload`, formData, {
             headers: { "Content-Type": "multipart/form-data" },
           });
           
@@ -68,11 +68,24 @@ const FileUpload = ({ onUploadSuccess, userId }) => {
     const acceptedExtensions = ['.js', '.jsx', '.ts', '.tsx', '.py', '.java', '.html', '.css'];
 
     return (
-        <div className="bg-[#16181a] rounded-2xl shadow-lg p-8 border border-[#3f474e]">
-            <h2 className="text-2xl font-bold text-white mb-4">Generate Documentation</h2>
+        <div className="bg-[#16181a] rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 border border-[#3f474e]">
+            <div className="mb-4 sm:mb-6">
+                <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">Generate Documentation</h2>
+                <div className="bg-indigo-900/20 border border-indigo-800/50 rounded-lg p-3">
+                    <div className="flex items-center mb-2">
+                        <svg className="w-4 h-4 text-indigo-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span className="text-indigo-300 font-medium text-xs sm:text-sm">Enhanced AI Documentation</span>
+                    </div>
+                    <p className="text-indigo-200 text-xs">
+                        Now generates structured documentation with sections, dependencies, function details, and usage examples
+                    </p>
+                </div>
+            </div>
             
             <div 
-                className={`border-2 border-dashed rounded-xl p-8 text-center ${
+                className={`border-2 border-dashed rounded-xl p-4 sm:p-6 lg:p-8 text-center ${
                     dragActive 
                         ? "border-indigo-500 bg-[#23272b]" 
                         : "border-[#3f474e] hover:border-indigo-400 bg-[#16181a]"
@@ -82,9 +95,9 @@ const FileUpload = ({ onUploadSuccess, userId }) => {
                 onDragOver={handleDrag}
                 onDrop={handleDrop}
             >
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                     <div className="flex justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 sm:h-10 sm:w-10 lg:h-12 lg:w-12 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                         </svg>
                     </div>
@@ -92,24 +105,24 @@ const FileUpload = ({ onUploadSuccess, userId }) => {
                     <div className="text-slate-200">
                         {file ? (
                             <div className="flex items-center justify-center space-x-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                 </svg>
-                                <span className="font-medium text-slate-100">{file.name}</span>
+                                <span className="font-medium text-slate-100 text-sm sm:text-base truncate max-w-xs">{file.name}</span>
                                 <button 
                                     onClick={() => setFile(null)}
-                                    className="text-red-400 hover:text-red-600"
+                                    className="text-red-400 hover:text-red-600 flex-shrink-0"
                                 >
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                                     </svg>
                                 </button>
                             </div>
                         ) : (
                             <>
-                                <p className="mb-2 text-indigo-300">Drag and drop a code file, or click to select</p>
-                                <p className="text-sm text-indigo-400">
-                                    Supported formats: {acceptedExtensions.join(', ')}
+                                <p className="mb-2 text-indigo-300 text-sm sm:text-base">Drag and drop a code file, or click to select</p>
+                                <p className="text-xs sm:text-sm text-indigo-400">
+                                    Supported: {acceptedExtensions.join(', ')}
                                 </p>
                             </>
                         )}
@@ -125,7 +138,7 @@ const FileUpload = ({ onUploadSuccess, userId }) => {
                         />
                         <label 
                             htmlFor="fileInput"
-                            className="cursor-pointer inline-flex items-center justify-center px-4 py-2 bg-[#3f474e] text-white hover:bg-indigo-700 rounded-md font-medium transition-colors"
+                            className="cursor-pointer inline-flex items-center justify-center px-3 sm:px-4 py-2 bg-[#3f474e] text-white hover:bg-indigo-700 rounded-md font-medium transition-colors text-sm sm:text-base"
                         >
                             {file ? "Choose Another File" : "Select File"}
                         </label>
@@ -133,11 +146,11 @@ const FileUpload = ({ onUploadSuccess, userId }) => {
                 </div>
             </div>
             
-            <div className="mt-6 flex justify-end">
+            <div className="mt-4 sm:mt-6 flex justify-end">
                 <button
                     onClick={handleUpload}
                     disabled={!file || loading}
-                    className={`flex items-center justify-center px-6 py-2 rounded-lg text-white font-semibold transition-all ${
+                    className={`flex items-center justify-center px-4 sm:px-6 py-2 rounded-lg text-white font-semibold transition-all text-sm sm:text-base ${
                         !file || loading 
                             ? "bg-[#3f474e] opacity-60 cursor-not-allowed" 
                             : "bg-indigo-600 hover:bg-indigo-700"
@@ -149,14 +162,16 @@ const FileUpload = ({ onUploadSuccess, userId }) => {
                                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                             </svg>
-                            Processing...
+                            <span className="hidden sm:inline">Processing...</span>
+                            <span className="sm:hidden">...</span>
                         </>
                     ) : (
                         <>
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                             </svg>
-                            Generate Documentation
+                            <span className="hidden sm:inline">Generate Structured Docs</span>
+                            <span className="sm:hidden">Generate</span>
                         </>
                     )}
                 </button>

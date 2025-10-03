@@ -17,69 +17,88 @@ const uploadFile = async (req, res) => {
     const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
 
     try {
-      const prompt = `Generate comprehensive documentation for this code:
-      
-    ${fileContent}
-    
-    Please include the following sections in Markdown format:
-    
-    ## Overview
-    - Provide a detailed explanation of what this code does
-    - Explain the purpose and primary functionality of this component/module
-    - Describe where it fits in the overall application architecture
-    
-    ## Component Structure
-    - Break down the major parts of the code
-    - Explain the component lifecycle (if applicable)
-    - Detail the state management approach used
-    
-    ## Functions and Methods
-    For each function or method:
-    - Name and purpose
-    - Detailed explanation of what it does and how it works
-    - Complete parameter list with types and descriptions
-    - Return value type and description
-    - Edge cases handled
-    - Any side effects
-    
-    ## Props (if applicable)
-    - List all props with their types
-    - Explain what each prop does
-    - Note which props are required vs. optional
-    - Document default values
-    
-    ## Dependencies
-    - List all imports and dependencies
-    - Explain why each dependency is needed
-    - Note any version requirements
-    
-    ## State Management
-    - Document all state variables
-    - Explain how state changes are handled
-    - Document any context or redux usage
-    
-    ## Event Handlers
-    - Document all event handlers
-    - Explain what triggers them and what they do
-    
-    ## Styling
-    - Explain the styling approach used
-    - Document important CSS classes/Tailwind utilities
-    
-    ## Usage Examples
-    - Provide 2-3 complete examples of how to use this component
-    - Include examples with different prop combinations
-    
-    ## Best Practices
-    - Note any performance considerations
-    - Document accessibility features
-    - List any known limitations or edge cases
-    
-    ## Related Components
-    - List related components that work with this one
-    - Explain how they interact
-    
-    Format the documentation to be easily readable with proper headings, lists, and code examples where appropriate.`;
+      const prompt = `You are an expert technical writer and software engineer. Generate comprehensive, structured documentation for the following code file following this exact format:
+
+# [Component/File Name] Documentation
+
+This document provides a detailed explanation of the [Component/File Name], a [brief description of what it does].
+
+## 1. Overview
+[2-3 sentences describing the main purpose, key features, and what makes this component/file unique]
+
+## 2. Dependencies
+List all external dependencies with brief descriptions:
+- **[Dependency Name]**: Brief description of what it's used for
+- **[Dependency Name]**: Brief description of what it's used for
+
+## 3. Component/Class: [Name]
+[Brief description of the main component/class and its role]
+
+### 3.1. State Management
+[If applicable, describe state variables and their purposes]
+- **[stateName]** ([type]): [Description]
+- **[stateName]** ([type]): [Description]
+
+### 3.2. Props/Parameters
+[If applicable, describe props or function parameters]
+- **[propName]** ([type]): [Description]
+- **[propName]** ([type]): [Description]
+
+### 3.3. Core Functions/Methods
+
+#### **[functionName]**([parameters])
+[Description of what this function does]
+- **Purpose**: [Why this function exists]
+- **Parameters**: 
+  - **[paramName]** ([type]): [Description]
+  - **[paramName]** ([type]): [Description]
+- **Returns**: ([type]) [Description of return value]
+- **Usage**: [Brief usage example if helpful]
+
+#### **[functionName]**([parameters])
+[Description of what this function does]
+- **Purpose**: [Why this function exists]
+- **Parameters**: 
+  - **[paramName]** ([type]): [Description]
+- **Returns**: ([type]) [Description of return value]
+
+### 3.4. Event Handlers
+[If applicable, describe event handling functions]
+- **[handlerName]**: [Description of what event it handles and what it does]
+
+### 3.5. Utility Functions
+[If applicable, describe helper/utility functions]
+- **[functionName]**: [Description and purpose]
+
+## 4. Usage Examples
+[Provide practical examples of how to use this component/code]
+
+\`\`\`[language]
+[Code example showing typical usage]
+\`\`\`
+
+## 5. Key Features
+- [Feature 1]: [Brief description]
+- [Feature 2]: [Brief description]
+- [Feature 3]: [Brief description]
+
+## 6. Implementation Notes
+[Any important implementation details, considerations, or gotchas]
+
+---
+
+**File to document:**
+\`\`\`
+${fileContent}
+\`\`\`
+
+Generate documentation that is professional, comprehensive, and follows this exact structure. Make sure to:
+1. Use proper markdown formatting
+2. Include code blocks with appropriate language tags
+3. Be thorough but concise
+4. Focus on practical usage and understanding
+5. Highlight important functions and their purposes clearly
+`;
 
       // Continue with sending the prompt to API...
 

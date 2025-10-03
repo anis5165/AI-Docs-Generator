@@ -27,7 +27,7 @@ const Signup = () => {
   const signupForm = useFormik({
     initialValues: { 'name': '', 'email': '', 'password': '', 'confirmPassword': '' },
     onSubmit: (values) => {
-      axios.post(`${NEXT_PUBLIC_API_URL}/user/register`, values)
+      axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user/register`, values)
         .then((result) => {
           console.log(result);
           toast.success('User registered successfully');
