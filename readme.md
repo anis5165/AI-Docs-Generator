@@ -4,7 +4,6 @@
 
 CodocAI is an intelligent documentation tool that automatically creates, structures, and maintains well-organized documentation for your software projects. Save time and improve consistency with AI assistance.
 
-![CodocAI Banner](/image.jpg)
 
 ## 🌟 Overview
 
@@ -78,7 +77,7 @@ We welcome contributions! Please feel free to submit issues and pull requests.
 
 ## 📧 Contact
 
-For questions, feedback, or support, please reach out to [your contact information].
+For questions, feedback, or support, please reach out to anishkumargvm02@gmail.com.
 
 ---
 
